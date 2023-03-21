@@ -9,21 +9,23 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TableLayout tableLayout;
+    private TextView textView;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        textView = findViewById(R.id.textView);
         tableLayout = findViewById(R.id.tableLayaut);
         TableRow tableRowAux = new TableRow(this);
         tableLayout.addView(tableRowAux);
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             tableLayout.addView(tableRowAux);
             tableRowAux.addView(getTextView(""+(i+1)));
             for (int j = 0; j<8;j++){
-                tableRowAux.addView(getImageView(i+j));
+                tableRowAux.addView(new Celda(this, null,new Cordenada((char) ('A'+j),1+i)));
             }
             tableRowAux.addView(getTextView(""+(i+1)));
         }
@@ -64,25 +66,17 @@ public class MainActivity extends AppCompatActivity {
         exit.setTextSize(22);
         exit.setHeight(widh/10);
         exit.setGravity(Gravity.CENTER);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setText(exit.getText());
+            }
+        });
         return exit;
     }
 
-    private ImageView getImageView(int i){
-        ImageView exit = new ImageView(this);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-
-        ((Activity) this).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        int widh = displayMetrics.widthPixels;
-        if (i%2!=0){
-            exit.setBackgroundColor(getResources().getColor(R.color.cellBlack));
-        }else {
-            exit.setBackgroundColor(getResources().getColor(R.color.cellWhite));
-        }
-        exit.setMaxHeight(widh/10);
-        exit.setMinimumHeight(widh/10);
-        exit.setMaxWidth(widh/10);
-        exit.setMinimumWidth(widh/10);
-        return exit;
+    @Override
+    public void onClick(View view) {
+        textView.setText((CharSequence) ((Celda) view).getCordenada());
     }
 }

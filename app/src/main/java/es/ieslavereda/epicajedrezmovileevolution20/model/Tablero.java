@@ -219,10 +219,12 @@ public class Tablero extends TableLayout implements Serializable {
 
 
 
-    public void hightlight(Set<Cordenada> setcordenada){
+    public void hightlight(Set<Cordenada> setcordenada,Celda celda){
         List<Cordenada> listCordenada = new LinkedList<>(setcordenada);
+        Set<Cordenada> cordenadasValidas = movementsSalveKing(celda.getCordenada(),celda.getPiece().getColor());
         for (Cordenada c : listCordenada){
-            getCelda(c).highLight();
+            if (cordenadasValidas.contains(c))
+                getCelda(c).highLight();
         }
     }
 

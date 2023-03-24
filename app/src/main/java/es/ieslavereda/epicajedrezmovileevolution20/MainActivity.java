@@ -16,14 +16,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Cordenada cordenadaPieza;
     private Tablero tableLayout;
-    private TextView textView;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.textView);
         tableLayout = (Tablero) findViewById(R.id.tableLayaut);
 
         tableLayout.setCellsOnClickListener(this::onClick);
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Celda celda = (Celda) view;
             if (!celda.isEmpty()&&!celda.isHighLight()) {
                 tableLayout.resetColors();
-                tableLayout.hightlight(celda.getPiece().getNextMovements());
+                tableLayout.hightlight(celda.getPiece().getNextMovements(),celda);
                 cordenadaPieza = celda.getCordenada();
             }else if (celda.isHighLight()){
                 tableLayout.movePiece(cordenadaPieza,celda.getCordenada());

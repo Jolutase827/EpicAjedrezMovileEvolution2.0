@@ -11,6 +11,7 @@ import es.ieslavereda.epicajedrezmovileevolution20.R;
  * @author José Luis Tárraga, Feat Joaquin
  */
 public abstract class Piece implements Serializable {
+
     private Type type;
     private Celda celda;
 

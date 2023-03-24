@@ -211,7 +211,7 @@ public class Tablero extends TableLayout implements Serializable {
     public Cordenada getKingPosition(Color color){
         for (Cordenada c : celdas.keySet()){
             if (!getCelda(c).isEmpty())
-                if (getCelda(c).getPiece().getType().getShape() == '♚' && getCelda(c).getPiece().getType().getColor().equals(color))
+                if ((getCelda(c).getPiece().getType().getShape() == R.mipmap.ic_b_king_foreground||getCelda(c).getPiece().getType().getShape() == R.mipmap.ic_n_king_foreground) && getCelda(c).getPiece().getType().getColor().equals(color))
                     return c;
         }
         return null;
@@ -221,7 +221,7 @@ public class Tablero extends TableLayout implements Serializable {
 
     public void hightlight(Set<Cordenada> setcordenada,Celda celda){
         List<Cordenada> listCordenada = new LinkedList<>(setcordenada);
-        Set<Cordenada> cordenadasValidas = movementsSalveKing(celda.getCordenada(),celda.getPiece().getColor());
+        Set<Cordenada> cordenadasValidas = new HashSet<>(movementsSalveKing(celda.getCordenada(),celda.getPiece().getColor()));
         for (Cordenada c : listCordenada){
             if (cordenadasValidas.contains(c))
                 getCelda(c).highLight();

@@ -51,12 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             .setAction("Volver a jugar", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    MainActivity.
+                                    onCreate(null);
                                 }
                             })
                             .show();
             }else
                 tableLayout.resetColors();
+
+            if (tableLayout.oneColorJake(turno))
+                tableLayout.getCelda(tableLayout.getKingPosition(turno)).hightLightHake();
         }
     }
 }

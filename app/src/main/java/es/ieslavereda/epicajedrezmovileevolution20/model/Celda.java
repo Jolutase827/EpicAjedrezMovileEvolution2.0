@@ -112,10 +112,11 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
 
     public void hightLightHake(){
         color = (original == R.color.cellBlack)? R.color.HIGHLIGHT_JAKE_BLACK : R.color.HIGHLIGHT_JAKE_WHITE;
+        setBackgroundColor(color);
     }
 
     public boolean isHighLight(){
-        return original!=color;
+        return color==R.color.hightLight_white||color == R.color.hightLight_black || color == R.color.hightLight_black_Kill|| color == R.color.hightLight_white_Kill;
     }
 
 

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             .setAction("Volver a jugar", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    onCreate(null);
+                                    tableLayout.reiniciarTablero();
                                 }
                             })
                             .show();

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import java.io.Serializable;
+import java.security.Identity;
 import java.util.*;
 
 import es.ieslavereda.epicajedrezmovileevolution20.R;
@@ -41,7 +42,7 @@ public class Tablero extends TableLayout implements Serializable {
         celdas = new LinkedHashMap<>();
         Celda celda;
         TableRow tableRowAux;
-
+        addDeadCamp(1);
         addTextViews();
 
         for (int i=0; i<8;i++){
@@ -58,6 +59,7 @@ public class Tablero extends TableLayout implements Serializable {
             tableRowAux.addView(getTextView(""+(i+1)));
         }
         addTextViews();
+        addDeadCamp(20);
         placePieces();
     }
 
@@ -70,31 +72,35 @@ public class Tablero extends TableLayout implements Serializable {
         placePieces();
     }
 
+    @SuppressLint("ResourceAsColor")
     public void addDeadCamp(int campo){
         TableRow tableRowAux = new TableRow(getContext());
         addView(tableRowAux);
         int id = campo+0;
-
-        tableRowAux.addView(getTextView(""));
+        TextView tx = getTextView("");
+        tx.setBackgroundColor(R.color.white);
+        tableRowAux.addView(tx);
         for (int x = 0;x<8;x++){
-            tableRowAux.addView(addCamp(1));
+            tableRowAux.addView(addCamp(id));
+            id++;
         }
-        tableRowAux.addView(getTextView(" "));
+         tx = getTextView("");
+        tx.setBackgroundColor(R.color.white);
+        tableRowAux.addView(tx);
+        tableRowAux = new TableRow(getContext());
+        addView(tableRowAux);
+        tx = getTextView("");
+        tx.setBackgroundColor(R.color.white);
+        tableRowAux.addView(tx);
+        for (int x = 0;x<8;x++){
+            tableRowAux.addView(addCamp(id));
+            id++;
+        }
+        tx = getTextView("");
+        tx.setBackgroundColor(R.color.white);
+        tableRowAux.addView(tx);
     }
-    @SuppressLint("ResourceType")
-    public ImageView addCamp(int id){
-        DisplayMetrics displayMetrics = new DisplayMetrics();
 
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widh = displayMetrics.widthPixels;
-        ImageView exit = new ImageView(getContext());
-        exit.setMaxWidth(widh/10);
-        exit.setMinimumHeight(widh/10);
-        exit.setMaxHeight(widh/10);
-        exit.setMinimumHeight(widh/10);
-        exit.setId();
-        return exit;
-    }
 
 
     private void addTextViews() {
@@ -286,6 +292,22 @@ public class Tablero extends TableLayout implements Serializable {
         exit.setGravity(Gravity.CENTER);
         return exit;
     }
+    @SuppressLint("ResourceType")
+    public ImageView addCamp(int id){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widh = displayMetrics.widthPixels;
+        ImageView exit = new ImageView(getContext());
+        exit.setMaxHeight(widh/10);
+        exit.setMinimumHeight(widh/10);
+        exit.setMaxWidth(widh/10);
+        exit.setMinimumWidth(widh/10);
+        exit.setPadding(0,0,0,0);
+        exit.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        exit.setAdjustViewBounds(true);
+        exit.setId(id);
+        return exit;
+    }
 
     public void resetColors(){
         for (Celda c : celdas.values())
@@ -303,7 +325,13 @@ public class Tablero extends TableLayout implements Serializable {
             if (!celdaPiece.isEmpty()) {
                 if (!celdaMovenet.isEmpty()) {
                     deletePieceManager.addPiece(celdaMovenet.getPiece());
-                    ((ImageView) findViewById(1) ).setImageResource(celdaMovenet.getPiece().getType().imagen);
+                    if (celdaPiece.getPiece().getColor()==Color.WHITE) {
+                        ((ImageView) findViewById(idDeadWhite)).setImageResource(celdaMovenet.getPiece().getType().imagen);
+                        idDeadWhite++;
+                    }else {
+                        ((ImageView) findViewById(idDeadBlack)).setImageResource(celdaMovenet.getPiece().getType().imagen);
+                        idDeadBlack++;
+                    }
                 }
                 else if (celdaPiece.getPiece() instanceof King) {
                     if (cMovement.equals(cPiece.left().left())) {

@@ -2,12 +2,14 @@ package es.ieslavereda.epicajedrezmovileevolution20.model;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ import es.ieslavereda.epicajedrezmovileevolution20.R;
 public class Tablero extends TableLayout implements Serializable {
 
 
+    private int idDeadWhite;
+    private int idDeadBlack;
     private Map<Cordenada, Celda> celdas;
 
     private IDeletePieceManager deletePieceManager;
@@ -31,10 +35,13 @@ public class Tablero extends TableLayout implements Serializable {
 
     public Tablero(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
+        idDeadBlack = 1;
+        idDeadWhite = 20;
         this.deletePieceManager = new DeletePieceManagerList();
         celdas = new LinkedHashMap<>();
         Celda celda;
         TableRow tableRowAux;
+
         addTextViews();
 
         for (int i=0; i<8;i++){
@@ -56,26 +63,37 @@ public class Tablero extends TableLayout implements Serializable {
 
     public void reiniciarTablero(){
         this.deletePieceManager = new DeletePieceManagerList();
-        celdas = new LinkedHashMap<>();
-        Celda celda;
-        TableRow tableRowAux;
-        addTextViews();
-
-        for (int i=0; i<8;i++){
-            tableRowAux = new TableRow(getContext());
-            addView(tableRowAux);
-
-            tableRowAux.addView(getTextView(""+(i+1)));
-            for (int j = 0; j<8;j++){
-                celda=new es.ieslavereda.epicajedrezmovileevolution20.model.Celda(getContext(), this,new es.ieslavereda.epicajedrezmovileevolution20.model.Cordenada((char) ('A'+j),1+i));
-                tableRowAux.addView(celda);
-                celdas.put(celda.getCordenada(),celda);
-            }
-
-            tableRowAux.addView(getTextView(""+(i+1)));
+        for (Celda c : celdas.values()){
+            c.setPiece(null);
+            c.resetColor();
         }
-        addTextViews();
         placePieces();
+    }
+
+    public void addDeadCamp(int campo){
+        TableRow tableRowAux = new TableRow(getContext());
+        addView(tableRowAux);
+        int id = campo+0;
+
+        tableRowAux.addView(getTextView(""));
+        for (int x = 0;x<8;x++){
+            tableRowAux.addView(addCamp(1));
+        }
+        tableRowAux.addView(getTextView(" "));
+    }
+    @SuppressLint("ResourceType")
+    public ImageView addCamp(int id){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widh = displayMetrics.widthPixels;
+        ImageView exit = new ImageView(getContext());
+        exit.setMaxWidth(widh/10);
+        exit.setMinimumHeight(widh/10);
+        exit.setMaxHeight(widh/10);
+        exit.setMinimumHeight(widh/10);
+        exit.setId();
+        return exit;
     }
 
 
@@ -277,13 +295,16 @@ public class Tablero extends TableLayout implements Serializable {
     public boolean kingIsDead(){
         return deletePieceManager.count(Piece.Type.WHITE_KING)>0||deletePieceManager.count(Piece.Type.BLACK_KING)>0;
     }
+    @SuppressLint("ResourceType")
     public void movePiece(Cordenada cPiece, Cordenada cMovement) {
         Celda celdaPiece = getCelda(cPiece);
         Celda celdaMovenet = getCelda(cMovement);
         if (celdaPiece != null && celdaMovenet != null) {
             if (!celdaPiece.isEmpty()) {
-                if (!celdaMovenet.isEmpty())
+                if (!celdaMovenet.isEmpty()) {
                     deletePieceManager.addPiece(celdaMovenet.getPiece());
+                    ((ImageView) findViewById(1) ).setImageResource(celdaMovenet.getPiece().getType().imagen);
+                }
                 else if (celdaPiece.getPiece() instanceof King) {
                     if (cMovement.equals(cPiece.left().left())) {
                         getCelda(cMovement.left().left()).getPiece().moveTo(cPiece.left());

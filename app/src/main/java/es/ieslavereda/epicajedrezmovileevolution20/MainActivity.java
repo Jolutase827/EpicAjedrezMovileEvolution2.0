@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     turno = Color.WHITE;
                                 }
                             })
+                            .setAction("Ir a menu",view1->{
+                                finish();
+                            })
                             .show();
             }else
                 tableLayout.resetColors();

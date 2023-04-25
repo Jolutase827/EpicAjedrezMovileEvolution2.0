@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tableLayout.movePiece(cordenadaPieza,celda.getCordenada());
                 tableLayout.resetColors();
                 turno = turno.next();
-                if (tableLayout.movementsValid(Color.BLACK).size()==0)
-                    Snackbar.make(tableLayout,"El jugador Negro ha perdido",Snackbar.LENGTH_LONG)
+                if (tableLayout.movementsValid(turno).size()==0)
+                    Snackbar.make(tableLayout,"El jugador "+((turno.equals(Color.WHITE))?"blanco":"negro")+" ha perdido",Snackbar.LENGTH_LONG)
                             .setAction("Volver a jugar", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     tableLayout.reiniciarTablero();
+                                    tableLayout.resetDeadCamp();
                                     turno = Color.WHITE;
                                 }
                             })

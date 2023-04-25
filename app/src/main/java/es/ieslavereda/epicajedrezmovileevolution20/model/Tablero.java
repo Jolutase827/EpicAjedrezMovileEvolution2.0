@@ -102,6 +102,16 @@ public class Tablero extends TableLayout implements Serializable {
     }
 
 
+    public void resetDeadCamp(){
+        for (int i=1;i<=16;i++){
+            ((ImageView)findViewById(i)).setImageResource(0);
+        }
+        for (int j=20;j<36;j++){
+            ((ImageView)findViewById(j)).setImageResource(0);
+        }
+
+    }
+
 
     private void addTextViews() {
         TableRow tableRowAux = new TableRow(getContext());

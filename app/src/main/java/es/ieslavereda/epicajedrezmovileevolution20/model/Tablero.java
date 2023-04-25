@@ -78,26 +78,26 @@ public class Tablero extends TableLayout implements Serializable {
         addView(tableRowAux);
         int id = campo+0;
         TextView tx = getTextView("");
-        tx.setBackgroundColor(R.color.white);
+        tx.setBackgroundColor(0);
         tableRowAux.addView(tx);
         for (int x = 0;x<8;x++){
             tableRowAux.addView(addCamp(id));
             id++;
         }
          tx = getTextView("");
-        tx.setBackgroundColor(R.color.white);
+        tx.setBackgroundColor(0);
         tableRowAux.addView(tx);
         tableRowAux = new TableRow(getContext());
         addView(tableRowAux);
         tx = getTextView("");
-        tx.setBackgroundColor(R.color.white);
+        tx.setBackgroundColor(0);
         tableRowAux.addView(tx);
         for (int x = 0;x<8;x++){
             tableRowAux.addView(addCamp(id));
             id++;
         }
         tx = getTextView("");
-        tx.setBackgroundColor(R.color.white);
+        tx.setBackgroundColor(0);
         tableRowAux.addView(tx);
     }
 

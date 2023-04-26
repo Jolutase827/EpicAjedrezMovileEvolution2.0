@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Color turno;
     private Cordenada cordenadaPieza;
     private Tablero tableLayout;
+    private Button  volvj, salir;
+    private TextView textGana;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         tableLayout = (Tablero) findViewById(R.id.tableLayaut);
         turno = Color.WHITE;
+        volvj = findViewById(R.id.volvjugar);
+        salir = findViewById(R.id.salir);
+        textGana = findViewById(R.id.textoganador);
 
         tableLayout.setCellsOnClickListener(this::onClick);
 
@@ -46,20 +52,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tableLayout.movePiece(cordenadaPieza,celda.getCordenada());
                 tableLayout.resetColors();
                 turno = turno.next();
-                if (tableLayout.movementsValid(turno).size()==0)
-                    Snackbar.make(tableLayout,"El jugador "+((turno.equals(Color.WHITE))?"blanco":"negro")+" ha perdido",Snackbar.LENGTH_LONG)
-                            .setAction("Volver a jugar", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    tableLayout.reiniciarTablero();
-                                    tableLayout.resetDeadCamp();
-                                    turno = Color.WHITE;
-                                }
-                            })
-                            .setAction("Ir a menu",view1->{
-                                finish();
-                            })
-                            .show();
+                if (tableLayout.movementsValid(turno).size()==0) {
+                    textGana.setText(((turno.equals(Color.WHITE)) ? "NEGRAS GANAN " : "BLANCAS GANAN"));
+                    salir.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            tableLayout.reiniciarTablero();
+                            tableLayout.resetDeadCamp();
+                            turno = Color.WHITE;
+                            volvj.setVisibility(View.GONE);
+                            salir.setVisibility(View.GONE);
+                            textGana.setVisibility(View.GONE);
+                        }
+                    });
+                    volvj.setOnClickListener(view1 -> {
+                        finish();
+                    });
+                    volvj.setVisibility(View.VISIBLE);
+                    salir.setVisibility(View.VISIBLE);
+                    textGana.setVisibility(View.VISIBLE);
+                }
             }else
                 tableLayout.resetColors();
 

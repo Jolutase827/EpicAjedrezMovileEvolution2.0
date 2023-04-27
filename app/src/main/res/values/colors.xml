@@ -15,8 +15,4 @@
     <color name="hightLight_black_Kill">#FD0000</color>
     <color name="HIGHLIGHT_JAKE_BLACK">#B082F3</color>
     <color name="HIGHLIGHT_JAKE_WHITE">#FF6200EE</color>
-    <color name="cellDessertWhite">#FF9800</color>
-    <color name="cellDessertBlack">#FF4800</color>
-    <color name="cellSandiaWhite">#FF00AA</color>
-    <color name="cellSandiaBlack">#085A11</color>
 </resources>

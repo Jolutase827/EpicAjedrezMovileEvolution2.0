@@ -16,33 +16,36 @@ public class Opciones extends AppCompatActivity {
 
     private Button clasic,disierto,sandia,guardar;
     private Tablero tablero;
-    private ColoresTablero coloresTablero;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opciones);
-        tablero = findViewById(R.id.tableLayaut);
+        tablero = findViewById(R.id.tablero);
         clasic = findViewById(R.id.clasic);
         disierto = findViewById(R.id.desierto);
         sandia = findViewById(R.id.sandia);
         guardar = findViewById(R.id.guardar);
+
         clasic.setOnClickListener(view -> {
-            coloresTablero = new ColoresTablero(R.color.cellBlack,R.color.cellWhite);
-            tablero.setColoresTablero(coloresTablero);
+            tablero.setColoresTablero(new ColoresTablero(R.color.cellBlack,R.color.cellWhite));
         });
+
+
         disierto.setOnClickListener(view -> {
-            coloresTablero = new ColoresTablero(R.color.cellDessertBlack,R.color.cellDessertWhite);
-            tablero.setColoresTablero(coloresTablero);
+            tablero.setColoresTablero(new ColoresTablero(R.color.cellDessertBlack,R.color.cellDessertWhite));
         });
+
+
         sandia.setOnClickListener(view -> {
-            coloresTablero=new ColoresTablero(R.color.cellSandiaBlack,R.color.cellSandiaWhite);
-            tablero.setColoresTablero(coloresTablero);
+            tablero.setColoresTablero(new ColoresTablero(R.color.cellSandiaBlack,R.color.cellSandiaWhite));
         });
+
+
         guardar.setOnClickListener(view -> {
             Intent intent = new Intent();
-            intent.putExtra("colores",coloresTablero);
+            intent.putExtra("colores",tablero.getColoresTablero());
             setResult(RESULT_OK,intent);
             finish();
         });

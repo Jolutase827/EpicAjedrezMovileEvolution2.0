@@ -46,11 +46,6 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
         setAdjustViewBounds(true);
     }
 
-    public void setColoresTablero(ColoresTablero coloresTablero) {
-        this.coloresTablero = coloresTablero;
-        original=(((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0)? coloresTablero.getColoresWhite():coloresTablero.getColoresBlack());
-        setBackgroundColor(original);
-    }
 
     public Celda(Context context, Tablero tablero, Cordenada cordenada, Piece p) {
         super(context);
@@ -75,6 +70,12 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
         setAdjustViewBounds(true);
     }
 
+
+    public void setColoresTablero(ColoresTablero coloresTablero) {
+        this.coloresTablero = coloresTablero;
+        original=(((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0)? coloresTablero.getColoresWhite():coloresTablero.getColoresBlack());
+        resetColor();
+    }
     public Tablero getTablero(){
         return tablero;
     }
@@ -107,19 +108,19 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
     }
     public void highLight(){
         if (isEmpty()){
-            if (original == R.color.cellWhite)
+            if (original == coloresTablero.getColoresWhite())
                 color = R.color.hightLight_white;
             else
                 color = R.color.hightLight_black;
 
         }else {
-            color = ((original == R.color.cellBlack)? R.color.hightLight_black_Kill : R.color.hightLight_white_Kill);
+            color = ((original == coloresTablero.getColoresBlack())? R.color.hightLight_black_Kill : R.color.hightLight_white_Kill);
         }
         setBackgroundColor(getResources().getColor(color));
     }
 
     public void hightLightHake(){
-        color = (original == R.color.cellBlack)? R.color.HIGHLIGHT_JAKE_BLACK : R.color.HIGHLIGHT_JAKE_WHITE;
+        color = (original == coloresTablero.getColoresBlack())? R.color.HIGHLIGHT_JAKE_BLACK : R.color.HIGHLIGHT_JAKE_WHITE;
         setBackgroundColor(color);
     }
 

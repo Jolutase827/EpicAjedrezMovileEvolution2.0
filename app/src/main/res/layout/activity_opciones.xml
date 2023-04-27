@@ -8,7 +8,7 @@
     tools:context=".Opciones">
 
     <es.ieslavereda.epicajedrezmovileevolution20.model.Tablero
-        android:id="@+id/tableLayout"
+        android:id="@+id/tablero"
         android:layout_width="match_parent"
         android:layout_height="535dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         android:fontFamily="@font/castorotitlingregular"
         android:text="Clasico"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tablero" />
 
     <Button
         android:id="@+id/sandia"
@@ -39,7 +39,7 @@
         android:text="Sandia"
         android:textColor="#FF00AA"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tablero" />
 
     <Button
         android:id="@+id/desierto"
@@ -51,7 +51,7 @@
         android:textColor="#FF9800"
         app:layout_constraintEnd_toStartOf="@+id/sandia"
         app:layout_constraintStart_toEndOf="@+id/clasic"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tablero" />
 
     <Button
         android:id="@+id/guardar"

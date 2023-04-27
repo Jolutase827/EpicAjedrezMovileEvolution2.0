@@ -66,6 +66,10 @@ public class Tablero extends TableLayout implements Serializable {
         placePieces();
     }
 
+    public ColoresTablero getColoresTablero() {
+        return coloresTablero;
+    }
+
     public void setColoresTablero(ColoresTablero coloresTablero) {
         this.coloresTablero = coloresTablero;
         for (Celda c: celdas.values()){

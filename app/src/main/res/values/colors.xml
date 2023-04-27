@@ -7,12 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cellBlack">#FF6F00</color>
-    <color name="cellWhite">#F49867</color>
+    <color name="cellBlack">#333333</color>
+    <color name="cellWhite">#C1C1C1</color>
     <color name="hightLight_white">#9BECDB</color>
     <color name="hightLight_black">#6AB6A6</color>
     <color name="hightLight_white_Kill">#F83C3C</color>
     <color name="hightLight_black_Kill">#FD0000</color>
     <color name="HIGHLIGHT_JAKE_BLACK">#B082F3</color>
     <color name="HIGHLIGHT_JAKE_WHITE">#FF6200EE</color>
+    <color name="cellDessertWhite">#FF9800</color>
+    <color name="cellDessertBlack">#FF4800</color>
+    <color name="cellSandiaWhite">#FF00AA</color>
+    <color name="cellSandiaBlack">#085A11</color>
 </resources>

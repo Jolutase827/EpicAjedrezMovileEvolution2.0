@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import es.ieslavereda.epicajedrezmovileevolution20.model.Celda;
 import es.ieslavereda.epicajedrezmovileevolution20.model.Color;
+import es.ieslavereda.epicajedrezmovileevolution20.model.ColoresTablero;
 import es.ieslavereda.epicajedrezmovileevolution20.model.Cordenada;
 import es.ieslavereda.epicajedrezmovileevolution20.model.Tablero;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tableLayout = (Tablero) findViewById(R.id.tableLayaut);
+        tableLayout.setColoresTablero((ColoresTablero) getIntent().getExtras().getSerializable("colores"));
         turno = Color.WHITE;
         volvj = findViewById(R.id.volvjugar);
         salir = findViewById(R.id.salir);
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 turno = turno.next();
                 if (tableLayout.movementsValid(turno).size()==0) {
                     textGana.setText(((turno.equals(Color.WHITE)) ? "NEGRAS GANAN " : "BLANCAS GANAN"));
-                    salir.setOnClickListener(new View.OnClickListener() {
+                    volvj.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             tableLayout.reiniciarTablero();
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             textGana.setVisibility(View.GONE);
                         }
                     });
-                    volvj.setOnClickListener(view1 -> {
+                    salir.setOnClickListener(view1 -> {
                         finish();
                     });
                     volvj.setVisibility(View.VISIBLE);

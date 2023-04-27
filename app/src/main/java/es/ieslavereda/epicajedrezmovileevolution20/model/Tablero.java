@@ -27,6 +27,8 @@ import es.ieslavereda.epicajedrezmovileevolution20.R;
 public class Tablero extends TableLayout implements Serializable {
 
 
+    private ColoresTablero coloresTablero;
+
     private int idDeadWhite;
     private int idDeadBlack;
     private Map<Cordenada, Celda> celdas;
@@ -36,6 +38,7 @@ public class Tablero extends TableLayout implements Serializable {
 
     public Tablero(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
+        coloresTablero = new ColoresTablero(R.color.cellBlack,R.color.cellWhite);
         idDeadBlack = 1;
         idDeadWhite = 20;
         this.deletePieceManager = new DeletePieceManagerList();
@@ -51,7 +54,7 @@ public class Tablero extends TableLayout implements Serializable {
 
             tableRowAux.addView(getTextView(""+(i+1)));
             for (int j = 0; j<8;j++){
-                celda=new es.ieslavereda.epicajedrezmovileevolution20.model.Celda(getContext(), this,new es.ieslavereda.epicajedrezmovileevolution20.model.Cordenada((char) ('A'+j),1+i));
+                celda=new es.ieslavereda.epicajedrezmovileevolution20.model.Celda(getContext(), this,new es.ieslavereda.epicajedrezmovileevolution20.model.Cordenada((char) ('A'+j),1+i),coloresTablero);
                 tableRowAux.addView(celda);
                 celdas.put(celda.getCordenada(),celda);
             }
@@ -61,6 +64,13 @@ public class Tablero extends TableLayout implements Serializable {
         addTextViews();
         addDeadCamp(20);
         placePieces();
+    }
+
+    public void setColoresTablero(ColoresTablero coloresTablero) {
+        this.coloresTablero = coloresTablero;
+        for (Celda c: celdas.values()){
+            c.setColoresTablero(coloresTablero);
+        }
     }
 
     public void reiniciarTablero(){

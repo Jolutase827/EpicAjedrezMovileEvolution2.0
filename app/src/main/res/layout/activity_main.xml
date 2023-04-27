@@ -22,7 +22,6 @@
         android:id="@+id/textoganador"
         android:layout_width="262dp"
         android:layout_height="51dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/castorotitlingregular"
         android:gravity="center"
         android:textColor="#000000"
@@ -36,29 +35,22 @@
         android:id="@+id/salir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:fontFamily="@font/castorotitlingregular"
         android:text="SALIR"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textoganador"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/textoganador"
-        app:layout_constraintTop_toBottomOf="@+id/textoganador"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoganador" />
 
     <Button
         android:id="@+id/volvjugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
         android:fontFamily="@font/castorotitlingregular"
         android:text="Volver a jugar"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textoganador"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="@+id/textoganador"
-        app:layout_constraintTop_toBottomOf="@+id/textoganador"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/salir"
+        app:layout_constraintTop_toBottomOf="@+id/textoganador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

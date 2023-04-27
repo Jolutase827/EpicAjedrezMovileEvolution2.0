@@ -18,12 +18,13 @@ import es.ieslavereda.epicajedrezmovileevolution20.R;
 public class Celda extends androidx.appcompat.widget.AppCompatImageView implements Serializable {
     private Piece piece;
 
+    private ColoresTablero coloresTablero;
     private int color;
     private int original;
     private Tablero tablero;
     private Cordenada cordenada;
 
-    public Celda(Context context, Tablero tablero, Cordenada cordenada) {
+    public Celda(Context context, Tablero tablero, Cordenada cordenada,ColoresTablero coloresTablero) {
         super(context);
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
@@ -33,7 +34,7 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
         this.cordenada = cordenada;
         this.tablero = tablero;
         this.piece = null;
-        this.original=(((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0)? R.color.cellWhite:R.color.cellBlack);
+        this.original=(((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0)? coloresTablero.getColoresWhite():coloresTablero.getColoresBlack());
         this.color = original;
         setMaxHeight(widh/10);
         setMinimumHeight(widh/10);
@@ -44,6 +45,13 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageView implemen
         setScaleType(ScaleType.FIT_CENTER);
         setAdjustViewBounds(true);
     }
+
+    public void setColoresTablero(ColoresTablero coloresTablero) {
+        this.coloresTablero = coloresTablero;
+        original=(((cordenada.getFila()-1 + cordenada.getCol() - 'A')%2==0)? coloresTablero.getColoresWhite():coloresTablero.getColoresBlack());
+        setBackgroundColor(original);
+    }
+
     public Celda(Context context, Tablero tablero, Cordenada cordenada, Piece p) {
         super(context);
         DisplayMetrics displayMetrics = new DisplayMetrics();

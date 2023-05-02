@@ -26,6 +26,7 @@
         android:backgroundTint="#303030"
         android:fontFamily="@font/castorotitlingregular"
         android:text="Clasico"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tablero" />
 
@@ -60,6 +61,7 @@
         android:backgroundTint="#F25C2D09"
         android:fontFamily="@font/castorotitlingregular"
         android:text="Guardar"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

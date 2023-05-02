@@ -38,6 +38,7 @@
         android:layout_marginStart="64dp"
         android:fontFamily="@font/castorotitlingregular"
         android:text="SALIR"
+        android:textColor="#FFFFFF"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoganador" />
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/castorotitlingregular"
         android:text="Volver a jugar"
+        android:textColor="#FFFFFF"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/salir"
